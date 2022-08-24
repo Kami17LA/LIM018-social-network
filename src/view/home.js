@@ -176,7 +176,7 @@ const home = {
 
     // funcion para remover modal
     function removeModal(clickContinue = () => {}) {
-      document.getElementById('btn-publicar').removeEventListener('click', clickContinue);
+      postForm['btn-publicar'].removeEventListener('click', clickContinue);
 
       modalPublication.classList.remove('show-modal-publication');
       activateScroll();
