@@ -97,7 +97,7 @@ const home = {
     const containerPost = document.querySelector('#contentPost');
     const postForm = document.querySelector('.create-post'); // form modal
     /* console.log(postForm); */
-    const nameRestaurant = document.querySelector('#name-restaurant');
+    const nameRestaurant = document.querySelector('.name-restaurant');
     const post = document.querySelector('.publicacion'); // texto de publicación
     const modalPublication = document.querySelector('.modal-container'); // div modal
     let currentUser;
@@ -212,7 +212,7 @@ const home = {
       const btnsEdit = containerPost.querySelectorAll('.btn-edit');
 
       btnsEdit.forEach((btn) => {
-        btn.addEventListener('click', async (event) => {
+        btn.addEventListener('click', (event) => {
           const editId = event.target.dataset.id;
 
           // función para
@@ -222,6 +222,9 @@ const home = {
             const content = post.value; // contenido del post
             /* console.log(content); */
             updatePost(editId, { content });
+            
+            const titleRestaurant = nameRestaurant.value;
+            updatePost(editId, { content, title: titleRestaurant });
 
             removeModal(clickContinue); // elimina el evento
             postForm.reset();
@@ -234,6 +237,7 @@ const home = {
               const doc = await getPost(editId);
               const publication = doc.data();
               post.value = publication.content;
+              nameRestaurant.value = publication.title;
               blockScroll();
             },
             clickContinue,
@@ -349,6 +353,7 @@ const home = {
           datePost: serverTime,
         });
         removeModal();
+        removeModal(clickContinue);
         postForm.reset();
       };
 
